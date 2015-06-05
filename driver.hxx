@@ -29,7 +29,7 @@ class Driver {
 		void setName(const std::string& name){_name=name;}
 		void setSurname(const std::string& surname){_surname=surname;}
 		void setAvailability(const std::string availability){_availability=availability;}
-    void changeAvailabilty();
+    		void changeAvailabilty();
 		
 		
 		int getID() const { return _ID ; }
