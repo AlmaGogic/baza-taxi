@@ -23,7 +23,7 @@ class Car
 		
 		/***********methods**********/
 		void makeCar(const std::string& license_plate, const std::string& model, const std::string& color,int year);
-		void printCarInfo();
+		void printCarInfo() const;
 		
 		void setLicense_plate( const std::string& license_plate){_license_plate=license_plate;}
 		void setBrand( const std::string& model ){ _model=model; }
@@ -38,7 +38,7 @@ class Car
 	
 };
 
- void Car::printCarInfo()
+ void Car::printCarInfo() const
 {
 	cout  <<" Model:" << _model << "  "<<_year<<"g.   "<<"Color:"<<_color<<"   License plates: "<<_license_plate<<endl; 
 }
