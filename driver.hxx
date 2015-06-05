@@ -21,7 +21,7 @@ class Driver {
 		
 		
 		void makeDriver(int ID,int age, const std::string& name,const std::string& surname,const std::string& license_plate, const std::string& model, const std::string& color,int year, const std::string& availability);
-		void printDriverInfo();
+		void printDriverInfo() const;
 		
 		void setID( int ID ) { _ID = ID ;}
 		void setAge( int age ) { _age = age ;}
@@ -29,6 +29,7 @@ class Driver {
 		void setName(const std::string& name){_name=name;}
 		void setSurname(const std::string& surname){_surname=surname;}
 		void setAvailability(const std::string availability){_availability=availability;}
+    void changeAvailabilty();
 		
 		
 		int getID() const { return _ID ; }
@@ -36,7 +37,7 @@ class Driver {
 		const Car& getAutomobile() const { return _automobile; }
 		std::string getName() const { return _name; }
 		std::string getSurname() const { return _surname; }
-		std::string getAvailablity() const {return _availability}
+		std::string getAvailablity() const {return _availability;}
 		
 		bool operator==( const Driver& other){ return this->_ID==other.getID(); }
 		bool operator!=( const Driver& other){ return this->_ID!=other.getID(); }
@@ -69,16 +70,23 @@ void Driver::makeDriver(int ID,int age, const std::string& name,const std::strin
 }
 
 
-void Driver::printDriverInfo()
+void Driver::printDriverInfo() const
 {
-	cout << "Driver: " << _surname << _name <<endl;
+	cout << "Driver: " << _surname << " " << _name <<endl;
 
-	cout << "Car: " << automobile.printCarInfo<<endl;
+	cout << "Car: " << endl;
+  _automobile.printCarInfo();
 
 
 	cout << "Availability: " << _availability << endl;
 	
 }
 
-
+void Driver::changeAvailabilty()
+{
+  if(this->_availability == "Yes")
+    _availability = "No";
+  else if(_availability == "No")
+    _availability = "Yes";
+}
 #endif
