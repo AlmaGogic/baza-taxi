@@ -41,6 +41,7 @@ class Driver {
 		
 		bool operator==( const Driver& other){ return this->_ID==other.getID(); }
 		bool operator!=( const Driver& other){ return this->_ID!=other.getID(); }
+		bool operator>( const  Driver& other){ return this->_availabilit>other.getAvailablity();  }
 		friend ostream& operator<<(ostream&, const Driver&);
 		
 		~Driver()=default;
