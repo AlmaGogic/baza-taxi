@@ -15,7 +15,7 @@ class priority_queue
         int Size() const;
 	int Length() const;
         bool isEmpty() const;
-        const elemType& top() const;
+        elemType& top();
         void push(const elemType& e);
         elemType pop();
         void rePRUp(int, int);
@@ -63,7 +63,7 @@ bool priority_queue<elemType>::isEmpty() const
 }
 
 template<typename elemType>
-const elemType& priority_queue<elemType>::top() const
+elemType& priority_queue<elemType>::top()
 {
     if(isEmpty())
     {

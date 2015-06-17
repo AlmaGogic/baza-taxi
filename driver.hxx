@@ -29,7 +29,7 @@ class Driver {
 		void setName(const std::string& name){_name=name;}
 		void setSurname(const std::string& surname){_surname=surname;}
 		void setAvailability(const std::string availability){_availability=availability;}
-    		void changeAvailabilty();
+    		void changeAvailability();
 		
 		
 		int getID() const { return _ID ; }
@@ -83,7 +83,7 @@ void Driver::printDriverInfo() const
 	
 }
 
-void Driver::changeAvailabilty()
+void Driver::changeAvailability()
 {
   if(this->_availability == "Yes")
     _availability = "No";
