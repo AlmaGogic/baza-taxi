@@ -7,15 +7,15 @@ class ArrayList
 private:
 	T* elements; 
 	int size;  
-	int maxsize;
+	int maxlength;
 public:
 	ArrayList(int n = 100); 
-	ArrayList(const ArrayList<T>& list); /
+	ArrayList(const ArrayList<T>& list); 
 	const ArrayList<T>& operator=(const ArrayList<T>&); 
 	bool empty() const; 
 	bool full() const; 
-	int size() const { return size; } 
-	int maxSize() const { return maxsize; } 
+	int Size() const { return size; } 
+	int maxLength() const { return maxlength; } 
 	void print() const; 
 	bool equal(int location, const T& obj) const;  
 	void insertAtLocation(int location, const T& objInsert); 
@@ -35,8 +35,8 @@ template<typename T>
 ArrayList<T>::ArrayList(int n)
 {
   if (n<0)  
-	  maxsize  = 100; 
-  else maxsize = n; 
+	  maxlength  = 100; 
+  else maxlength = n; 
   size = 0; 
   elements = new T[n];
 }
@@ -45,9 +45,9 @@ ArrayList<T>::ArrayList(int n)
 template<typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& list)
 {
-	maxsize = list.maxSize(); 
+	maxlength = list.maxlength(); 
 	size = list.size(); 
-	elements = new T[maxsize]; 
+	elements = new T[maxlength]; 
 	for (int i = 0; i<size; i++)
 		elements[i] = list.elements[i];
 }
@@ -59,10 +59,10 @@ const ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& drugaLista)
 	if (this!=&drugaLista) 
 	{
 		delete [] elements; 
-		maxsize = drugaLista.maxSize(); 
+		maxlength = drugaLista.maxlength(); 
 		size = drugaLista.size(); 
-		elements = new T[maxSize]; 
-		for (int = 1; i<size; i++)
+		elements = new T[maxlength]; 
+		for (int i= 1; i<size; i++)
 			elements[i] = drugaLista.elements[i];
 	}
 	return *this; 
@@ -79,7 +79,7 @@ bool ArrayList<T>::empty() const
 template<typename T>
 bool ArrayList<T>::full() const
 {
-	return (size == maxsize);
+	return (size == maxlength);
 }
 
 
@@ -103,7 +103,7 @@ bool ArrayList<T>::equal(int location, const T& obj) const
 template<typename T> 
 void ArrayList<T>::insertAtLocation(int location, const T& objInsert)
 {
-	if (location<0 || location > maxsize)
+	if (location<0 || location > maxlength)
 		throw string("Can't insert at given location. Enter index from 0 to maximal list size.");
 	else 
 	{
