@@ -21,10 +21,10 @@ class DriversList: public ArrayList<Driver>
 void DriversList::PrintDriversList(){
 	cout<<"List of drivers:"<<endl;
 	cout<<"-----------------------------------------------"<<endl;
-	for(int i=0;i<ArrayList.Size(); i++)
-	{
-	 printDriverInfo();
-	}
+	
+for(auto i=0; i<(*this).Size(); i++)
+    (*this).grabElement(i).printDriverInfo();
+	cout << endl; 
 }
 	
 void DriversList::InsertByAvailability(const Driver& A)
