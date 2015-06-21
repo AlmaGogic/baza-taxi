@@ -9,7 +9,7 @@ class DriversList: public ArrayList<Driver>
 {
 	
 	public:
-			void InsertByAvailability(Driver A);
+			void InsertByAvailability(const Driver& A);
 	
 	
 	
@@ -17,13 +17,13 @@ class DriversList: public ArrayList<Driver>
 	
 	};
 	
-void DriversList::InsertByAvailability(Driver A)
+void DriversList::InsertByAvailability(const Driver& A)
 {
 	if (A.getAvailability()=="Yes")
-	insertAtLocation(0,const &A);
+	insertAtLocation(0,A);
 	else 
 	if (A.getAvailability()=="No")
-	insertLast(const& A);
+	insertAtEnd(A);
 	
 	return;
 	
