@@ -25,7 +25,7 @@ class Driver {
 		
 		void setID( int ID ) { _ID = ID ;}
 		void setAge( int age ) { _age = age ;}
-		void setAutomobile( const std::string& license_plate, const std::string& model, const std::string& color,int year );
+		void setAutomobile( const std::string& license_plate, const std::string& model, const std::string& color,int year ) { _automobile.makeCar(license_plate, model, color, year);}
 		void setName(const std::string& name){_name=name;}
 		void setSurname(const std::string& surname){_surname=surname;}
 		void setAvailability(const std::string availability){_availability=availability;}
@@ -37,11 +37,11 @@ class Driver {
 		const Car& getAutomobile() const { return _automobile; }
 		std::string getName() const { return _name; }
 		std::string getSurname() const { return _surname; }
-		std::string getAvailablity() const {return _availability;}
+		std::string getAvailability() const {return _availability;}
 		
 		bool operator==( const Driver& other){ return this->_ID==other.getID(); }
 		bool operator!=( const Driver& other){ return this->_ID!=other.getID(); }
-		bool operator>( const  Driver& other){ return this->_availability>other.getAvailablity();  }
+		bool operator>( const  Driver& other){ return this->_availability>other.getAvailability();  }
 		friend ostream& operator<<(ostream&, const Driver&);
 		
 		~Driver()=default;

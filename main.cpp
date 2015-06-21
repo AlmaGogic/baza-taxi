@@ -13,7 +13,7 @@ int ID, age, year;
 string name, surname, availability, license_plate, color, model;
 Driver driver;
 Car car; 
-ifstream myfile ("base.txt");
+/* ifstream myfile ("base.txt");
 if (myfile.is_open())
 {
   while (myfile != "\n"){
@@ -40,7 +40,7 @@ if (myfile.is_open())
 else { 
 cout << "There is no file to open." << endl;
 }
-
+*/
 cout << "Like administrator you have next option's to chose:" << endl;
 int option;
 for(int i=0; i<50; i++){
@@ -102,10 +102,7 @@ cout << "Availability is changed. " << endl;
 */
 if(option == 4){
 //printing the base
-cout << "Here are the all drivers in the base: " << endl;
-for(auto i=0; i<base.Size(); i++)
-    base.grabElement(i).printDriverInfo();
-	cout << endl; 
+base.PrintDriversList();
 }
 
 
