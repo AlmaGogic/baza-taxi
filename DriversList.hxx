@@ -12,9 +12,22 @@ class DriversList: public ArrayList<Driver>
 	public:
 			void InsertByAvailability(const Driver& A);
 			void PrintDriversList();
-                        void LoadFromFile(std::istream&);
-                        void LoadInFile(std::ostream&);	
+            void LoadFromFile(std::istream&);
+            void LoadInFile(std::ostream&);	
+            void changingAvailability(int Id);
 };
+void DriversList::changingAvailability(int Id){
+	for(auto i=0; i<(*this).Size(); i++)
+    if((*this).grabElement(i).getID()==Id){
+	if((*this).grabElement(i).getAvailability()=="Yes")
+	(*this).grabElement(i).setAvailability("No");
+	else
+	(*this).grabElement(i).setAvailability("Yes");
+	}
+}
+	
+	
+	
 
 void DriversList::PrintDriversList(){
 	cout<<"List of drivers:"<<endl;
@@ -61,7 +74,7 @@ void DriversList::LoadFromFile(std::istream& file)
 void DriversList::LoadInFile(std::ostream& file)
 {
   int ID, age, year;
-  string name, surname, availability, license_plate, color, model;
+  std::string name, surname, availability, license_plate, color, model;
   Driver driver;
   Car car;
 
