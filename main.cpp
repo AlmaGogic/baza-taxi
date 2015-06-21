@@ -1,59 +1,152 @@
 #include <iostream>
+#include <string>
 #include "DriversList.hxx"
 #include <fstream>
+#include <sstream>
 
 using namespace std;
+
+int getFileSize();
+int printMenu();
+void loadFromFile(DriversList& base);
+void addNewItem(DriversList& base);
+void saveInFile(DriversList& base);
+void moveFromBase(DriversList& base);
 
 int main(){
 
 DriversList base;
 ArrayList<int> *base_search = new ArrayList<int>();
+bool added_new = false, already_loaded = false, saved_in_file = false;
+int file_size;
+int option;
+
+
+option = printMenu();
+
+if(option == 1){
+loadFromFile(base);
+already_loaded = true;	
+cout << "The data has been loaded." << endl;	
+}
+
+if(option == 2){
+//adding the driver
+
+file_size = getFileSize();
+			
+if(file_size > 0 && !already_loaded){
+			
+   cout<<"Something is already stored in file. Do you want to load it? Y/N:";
+   char answer;
+   cin>>answer;
+   if(answer == 'Y') {				
+   loadFromFile(base);
+   }
+}
+
+already_loaded = true;									
+added_new = true;
+saved_in_file = false;
+addNewItem(base);
+
+cout << "The driver has been added to base." << endl;	
+}
+
+if(option == 3){
+//moving driver from a base
+moveFromBase(base);
+}
+
+
+if(option == 4){
+//changing availability of a driver
+cout << "Availability is changed. " << endl;
+}
+
+if(option == 5){
+//printing the base
+base.PrintDriversList();
+}
+
+
+if(option == 6){
+//saving the data
+
+saveInFile(base);
+saved_in_file = true;
+cout << "The data has been saved." << endl;
+
+}
+
+if(option == 7){
+cout << "Ending program..." << endl;
+}
+
+
+
+if(added_new && !saved_in_file){
+cout << "Do you want to save unsaved changes? (Y, N)" << endl;
+char save;
+cin >> save;
+if(save == 'Y'){
+saveInFile(base);
+saved_in_file = true;
+
+cout << "The data has been saved." << endl;
+
+}
+
+cout << "Goodbye. " << endl;
+return 0;
+}
+}
+
+int getFileSize() {	
+	std::ifstream is ("phonebook.txt", std::ifstream::binary);
+	int length = 0;
+	if (is) {	    
+	    is.seekg (0, is.end);
+	    length = is.tellg();	   
+	    is.close();
+	}
+	return length;
+}
+
+int printMenu(){
+cout << "Like administrator you have next option's to chose:" << endl;
+int option;
+cout << "If you want to load data from file, chose option 1." << endl;
+cout << "If you want to add new driver to the Base, you chose option 2." << endl;
+cout << "If you want to remove driver from base, use option 3." << endl;
+cout << "If you want to change availability of a driver chose option 4. " << endl;
+cout << "If you want to print the base, chose option 5." << endl;
+cout << "If you want to save the changes, chose option 6." << endl;
+cout << "If you want to close the program chose option 7. " << endl;
+cin >> option;
+}
+
+void loadFromFile(DriversList& base){
+	
+	ifstream file("base.txt");
+	
+	if (file.is_open())
+	{
+		base.LoadFromFile(file);
+		file.close();
+	}
+	else{
+		cout<<"Cannot opet file...Maybe file does not exist yet?"<<endl;
+	}
+
+}
+
+void addNewItem(DriversList& base){
 
 int ID, age, year;
 string name, surname, availability, license_plate, color, model;
 Driver driver;
 Car car; 
-/* ifstream myfile ("base.txt");
-if (myfile.is_open())
-{
-  while (myfile != "\n"){
-    myfile >> ID;
-     driver.setID(ID);
-    myfile >> age;
-     driver.setAge(age);
-    myfile >> name;
-     driver.setName(name);
-    myfile >> surname;
-    driver.setSurname(surname);
-    myfile >> availability;
-   driver.setAvailability(availability);
-    myfile >> license_plate;
-    myfile >> color;
-    myfile >> model;
-    myfile >> year;
-   
-      driver.setAutomobile(license_plate, model, color, year);
-       base.InsertByAvailability(driver);
-  }
-  myfile.close();
-} 
-else { 
-cout << "There is no file to open." << endl;
-}
-*/
-cout << "Like administrator you have next option's to chose:" << endl;
-int option;
-for(int i=0; i<50; i++){
-cout << "If you want to add new driver to the Base, you chose option 1." << endl;
-cout << "If you want to remove driver from base, use option 2." << endl;
-cout << "If you want to change availability of a driver chose option 3. " << endl;
-cout << "If you want to print the base, chose option 4." << endl;
-cout << "If you want to save the changes, chose option 5." << endl;
-cout << "If you want to close the program chose option 6. " << endl;
-cin >> option;
-
-if(option == 1){
-//adding the driver
 
 cout << "Type name of new driver: " << endl;
 cin >> name;
@@ -81,9 +174,23 @@ cout << "The driver has been added to the base." << endl;
 cout << endl;
 }
 
-if(option == 2){
-//moving driver from a base
+void saveInFile(DriversList& base){
+
+	ofstream file("base.txt");
+
+	if (file.is_open())
+	{
+		base.LoadInFile(file);
+		file.close();
+	}
+	else{
+		cout<<"Cannot opet file..."<<endl;
+	}
+}
+
+void moveFromBase(DriversList& base){
 cout << "Type ID of a driver you want to move from base." << endl;
+int ID;
 cin >> ID;
 for(auto i=0; i<base.Size(); i++){
    if(base.grabElement(i).getID() == ID){
@@ -91,75 +198,4 @@ for(auto i=0; i<base.Size(); i++){
       cout << "The Driver: " << base.grabElement(i).getName() << " " << base.grabElement(i).getSurname() << " has been deleted from base." << endl;
     }
   }
-}
-/*
-if(option == 3){
-//changing availability of a driver
-base->top().changeAvailability();
-base->rePRDown(0, base->Size());
-cout << "Availability is changed. " << endl;
-}
-*/
-if(option == 4){
-//printing the base
-base.PrintDriversList();
-}
-
-
-if(option == 5){
-//saving the data
-ofstream myfile;
-  myfile.open ("base.txt");
-  if(myfile.is_open()){
-  myfile << "ID\t" << "Name:\t" << "Surname\t" << "Age:\t" << "License plate: " << "Model:\t" << "Color:\t" << "Year:\t" << "Availability:"<< "\n";
-  for(auto i=0; i<base.Size(); i++){
-    ID = base.grabElement(i).getID();
-    name = base.grabElement(i).getName();
-    surname = base.grabElement(i).getSurname();
-    age = base.grabElement(i).getAge();
-    car = base.grabElement(i).getAutomobile();
-    license_plate = car.getLicense_plate();
-    model = car.getBrand();
-    color = car.getColor();
-    year = car.getYear();
-    availability = base.grabElement(i).getAvailability();
-    myfile << ID << " " << name << " " << surname << " " << age << " " << license_plate << " " << model << " " << color << " " << year << " " << availability << "\n";
-  }
- // "Writing informations to a file.
-  myfile.close();
-}
-}
-
-if(option == 6){
-cout << "Do you want to save unsaved changes? (Y, N)" << endl;
-string save;
-cin >> save;
-if(save == "Y"){
-ofstream myfile;
-  myfile.open ("base.txt");
-  if(myfile.is_open()){
-  myfile << "ID\t" << "Name:\t" << "Surname:\t" << "Age:\t" << "License plate: " << "Model:\t" << "Color:\t" << "Year:\t" << "Availability:"<< "\n";
-  for(auto i=0; i<base.Size(); i++){
-    ID = base.grabElement(i).getID();
-    name = base.grabElement(i).getName();
-    surname = base.grabElement(i).getSurname();
-    age = base.grabElement(i).getAge();
-    car = base.grabElement(i).getAutomobile();
-    license_plate = car.getLicense_plate();
-    model = car.getBrand();
-    color = car.getColor();
-    year = car.getYear();
-    availability = base.grabElement(i).getAvailability();
-    myfile << ID << "\t " << name << "  " << surname << "\t  " << age << "\t " << license_plate << "\t  " << model << "\t " << color << "\t " << year << "\t\t " << availability << "\n";
-  }
- }
- // "Writing informations to a file.
-  myfile.close();
-return 0;
-}
-
-else if(save == "N")
-return 0;
-}
-}
 }
