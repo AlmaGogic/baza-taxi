@@ -1,3 +1,0 @@
-﻿ID	Name:	  Surname:	  Age:  License plate: Model: 	Color:   Year:	Availability:
-15	Samra   Muratovic	  21	  546-T-457	     Mercedes	orange   2013		 Yes
-12	Alma    Gogic	  22	  154-K-457	     BMW	      red	   2012		 Yes

@@ -21,7 +21,7 @@ bool added_new = false, already_loaded = false, saved_in_file = false;
 int file_size;
 int option;
 
-
+do{
 option = printMenu();
 
 if(option == 1){
@@ -82,7 +82,7 @@ cout << "The data has been saved." << endl;
 if(option == 7){
 cout << "Ending program..." << endl;
 }
-
+}while(option != 7);
 
 
 if(added_new && !saved_in_file){
@@ -124,6 +124,7 @@ cout << "If you want to print the base, chose option 5." << endl;
 cout << "If you want to save the changes, chose option 6." << endl;
 cout << "If you want to close the program chose option 7. " << endl;
 cin >> option;
+return option;
 }
 
 void loadFromFile(DriversList& base){
