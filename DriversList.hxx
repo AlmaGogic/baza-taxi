@@ -10,12 +10,22 @@ class DriversList: public ArrayList<Driver>
 	
 	public:
 			void InsertByAvailability(const Driver& A);
-	
+			void PrintDriversList();
+
 	
 	
 
 	
-	};
+};
+
+void DriversList::PrintDriversList(){
+	cout<<"List of drivers:"<<endl;
+	cout<<"-----------------------------------------------"<<endl;
+	for(int i=0;i<ArrayList.Size(); i++)
+	{
+	 printDriverInfo();
+	}
+}
 	
 void DriversList::InsertByAvailability(const Driver& A)
 {
@@ -27,6 +37,6 @@ void DriversList::InsertByAvailability(const Driver& A)
 	
 	return;
 	
-	}
+}
 
 #endif
