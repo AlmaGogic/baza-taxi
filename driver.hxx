@@ -73,13 +73,13 @@ void Driver::makeDriver(int ID,int age, const std::string& name,const std::strin
 
 void Driver::printDriverInfo() const
 {
-	cout << "Driver: " << _surname << " " << _name <<endl;
+	cout << "Driver: " << _surname << " " << _name<<endl;
 
-	cout << "Car: " << endl;
+	cout << " \t Car: \n " ;
   _automobile.printCarInfo();
 
 
-	cout << "Availability: " << _availability << endl;
+	cout << "\t Availability: " << _availability << endl;
 	
 }
 
