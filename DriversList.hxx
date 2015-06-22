@@ -35,7 +35,7 @@ void DriversList::changingAvailability(int Id){
 void DriversList::PrintDriversList(){
 	cout<<"List of drivers:"<<endl;
 	cout<<"-----------------------------------------------"<<endl;
-	sort();
+	sortbyName();
 for(auto i=0; i<(*this).Size(); i++)
     (*this).grabElement(i).printDriverInfo();
 	cout << endl; 
