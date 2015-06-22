@@ -193,10 +193,15 @@ void moveFromBase(DriversList& base){
 cout << "Type ID of a driver you want to move from base." << endl;
 int ID;
 cin >> ID;
+if( !(base.empty()) ){
 for(auto i=0; i<base.Size(); i++){
    if(base.grabElement(i).getID() == ID){
       base.removeFromLocation(i);
       cout << "The Driver: " << base.grabElement(i).getName() << " " << base.grabElement(i).getSurname() << " has been deleted from base." << endl;
     }
+   else
+     cout << "There is no driver with this ID in base. " << endl;
   }
+}
+else cout << "The base is empty." << endl;
 }
