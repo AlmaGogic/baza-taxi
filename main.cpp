@@ -193,7 +193,7 @@ void saveInFile(DriversList& base){
 
 void saveIDs(DriversList& base)
 {
-  base.sort();
+  base.sortByID();
   ofstream file("ID_base.txt");
   if(file.is_open())
   {
