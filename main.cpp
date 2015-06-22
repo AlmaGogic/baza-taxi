@@ -101,7 +101,7 @@ return 0;
 }
 
 int getFileSize() {	
-	std::ifstream is ("phonebook.txt", std::ifstream::binary);
+	std::ifstream is ("base.txt", std::ifstream::binary);
 	int length = 0;
 	if (is) {	    
 	    is.seekg (0, is.end);
