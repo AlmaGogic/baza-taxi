@@ -177,7 +177,8 @@ void addNewItem(DriversList& base){
 }
 
 void saveInFile(DriversList& base){
-
+	
+	base.sortByName();
 	ofstream file("base.txt");
 
 	if (file.is_open())
