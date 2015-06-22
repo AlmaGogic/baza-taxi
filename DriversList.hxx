@@ -16,7 +16,8 @@ class DriversList: public ArrayList<Driver>
       void LoadInFile(std::ostream&);
       void SaveIDs(std::ostream&);
       void changingAvailability(int Id);
-      void sort();
+      void sortByID();
+      void sortByName();
 };
 void DriversList::changingAvailability(int Id){
 	for(auto i=0; i<(*this).Size(); i++)
@@ -120,7 +121,7 @@ void DriversList::SaveIDs(std::ostream& file)
 }
 
 
-void DriversList::sort()
+void DriversList::sortByID()
 {
   for(int step=Size()/2; step>0; step/=2)
   {
@@ -140,5 +141,24 @@ void DriversList::sort()
   }
 }
 
+void DriversList::sortByName()
+{
+  for(int step=Size()/2; step>0; step/=2)
+  {
+    for(int j = step; j < Size(); ++j)
+    {
+      for(int i=j; i >= step; i-=step)
+      {
+        if(grabElement(i).getName() < grabElement(i-step).getName())
+        {
+          Driver temp = grabElement(i);
+          grabElement(j) = grabElement(i-step);
+          grabElement(i-step) = temp;
+
+        }
+      }
+    }
+  }
+}
 
 #endif
