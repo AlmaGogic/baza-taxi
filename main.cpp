@@ -49,8 +49,6 @@ already_loaded = true;
 added_new = true;
 saved_in_file = false;
 addNewItem(base);
-
-cout << "The driver has been added to base." << endl;	
 }
 
 if(option == 3){

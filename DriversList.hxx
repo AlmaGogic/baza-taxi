@@ -52,14 +52,14 @@ void DriversList::InsertByAvailability(const Driver& A)
 
 void DriversList::LoadFromFile(std::istream& file)
 {
-	if(!empty()) deleteList();
+        if(!empty()) deleteList();
 
 	int ID, age, year;
         string name, surname, availability, license_plate, color, model;
         Driver driver;
         Car car; 
 
-	while(file >> ID >> age >> name >> surname >> license_plate >> color >> model >> year >> availability) {
+	while(file >> ID >> age >> name >> surname >> license_plate >> color >> model >> year >> availability ){
 		 driver.setID(ID);
                  driver.setAge(age);
                  driver.setName(name);
@@ -67,8 +67,8 @@ void DriversList::LoadFromFile(std::istream& file)
                  driver.setAutomobile(license_plate, model, color, year);
                  driver.setAvailability(availability);
                  
-                 InsertByAvailability(driver);
-	}
+                 (*this).InsertByAvailability(driver);
+       }
 }
 
 void DriversList::LoadInFile(std::ostream& file)
