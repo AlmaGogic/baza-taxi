@@ -12,9 +12,11 @@ class DriversList: public ArrayList<Driver>
 	public:
 			void InsertByAvailability(const Driver& A);
 			void PrintDriversList();
-            void LoadFromFile(std::istream&);
-            void LoadInFile(std::ostream&);	
-            void changingAvailability(int Id);
+      void LoadFromFile(std::istream&);
+      void LoadInFile(std::ostream&);
+      void SaveIDs(std::ostream&);
+      void changingAvailability(int Id);
+      void sort();
 };
 void DriversList::changingAvailability(int Id){
 	for(auto i=0; i<(*this).Size(); i++)
@@ -52,14 +54,14 @@ void DriversList::InsertByAvailability(const Driver& A)
 
 void DriversList::LoadFromFile(std::istream& file)
 {
-        if(!empty()) deleteList();
+	if(!empty()) deleteList();
 
 	int ID, age, year;
         string name, surname, availability, license_plate, color, model;
         Driver driver;
         Car car; 
 
-	while(file >> ID >> age >> name >> surname >> license_plate >> color >> model >> year >> availability ){
+	while(file >> ID >> age >> name >> surname >> license_plate >> color >> model >> year >> availability) {
 		 driver.setID(ID);
                  driver.setAge(age);
                  driver.setName(name);
@@ -67,8 +69,8 @@ void DriversList::LoadFromFile(std::istream& file)
                  driver.setAutomobile(license_plate, model, color, year);
                  driver.setAvailability(availability);
                  
-                 (*this).InsertByAvailability(driver);
-       }
+                 InsertByAvailability(driver);
+	}
 }
 
 void DriversList::LoadInFile(std::ostream& file)
@@ -96,5 +98,47 @@ void DriversList::LoadInFile(std::ostream& file)
    }
   }	
 }
+
+void DriversList::SaveIDs(std::ostream& file)
+{
+  int ID, position;
+  Driver driver;
+  Car car;
+
+  if(empty())
+    cout << "Nothing to save..." << endl;
+  else
+  {
+    file << "ID\t" << "Position\t" << "\n";
+    for(auto i =0; i<Size(); ++i)
+    {
+      ID = grabElement(i).getID();
+      position = returnIdLocation(ID)+1;
+      file << ID << "\t" << position << "\n";
+    }
+  }
+}
+
+
+void DriversList::sort()
+{
+  for(int step=Size()/2; step>0; step/=2)
+  {
+    for(int j = step; j < Size(); ++j)
+    {
+      for(int i=j; i >= step; i-=step)
+      {
+        if(grabElement(i).getID() < grabElement(i-step).getID())
+        {
+          Driver temp = grabElement(i);
+          grabElement(j) = grabElement(i-step);
+          grabElement(i-step) = temp;
+
+        }
+      }
+    }
+  }
+}
+
 
 #endif
