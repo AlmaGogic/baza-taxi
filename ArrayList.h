@@ -26,7 +26,9 @@ public:
 	int search(const T& obj); 
 	void insert(const T& obj); 
 	void remove(const T& obj); 
-	T& grabElement(int location); 
+	T& grabElement(int location);
+  int returnIdLocation(int id);
+
 	~ArrayList(void) { delete [] elements; }
 };
 
@@ -207,3 +209,16 @@ T& ArrayList<T>::grabElement(int location)
 	else 
 		return elements[location];
 }
+
+template<typename T>
+int ArrayList<T>::returnIdLocation(int id)
+{
+  for(int i=0; i<size; ++i)
+  {
+    if(elements[i].getID() == id)
+      return i;
+  }
+  return -1;
+}
+
+
